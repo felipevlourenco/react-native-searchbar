@@ -97,7 +97,7 @@ export default class Search extends Component {
     super(props);
     this.state = {
       input: '',
-      dimensions: Dimensions.get("window"),
+      dimensions: Dimensions.get('window'),
       show: props.showOnLoad,
       top: new Animated.Value(
         props.showOnLoad ? 0 : INITIAL_TOP + props.heightAdjust
@@ -109,8 +109,8 @@ export default class Search extends Component {
     return this.state.input;
   };
 
-  setValue = (input) => {
-    return this.setState({input})
+  setValue = input => {
+    return this.setState({ input });
   };
 
   show = () => {
@@ -123,7 +123,7 @@ export default class Search extends Component {
       Animated.timing(this.state.top, {
         toValue: 0,
         duration: animationDuration,
-        useNativeDriver: true,
+        useNativeDriver: true
       }).start();
     } else {
       this.setState({ top: new Animated.Value(0) });
@@ -139,7 +139,7 @@ export default class Search extends Component {
       Animated.timing(this.state.top, {
         toValue: INITIAL_TOP,
         duration: animationDuration,
-        useNativeDriver: true,
+        useNativeDriver: true
       }).start();
       const timerId = setTimeout(() => {
         this._doHide();
@@ -222,14 +222,14 @@ export default class Search extends Component {
     return some(collection, item => this._depthFirstSearch(item, input));
   };
 
-  _dimHandler = dims => this.setState({dimensions: dims.window});
+  _dimHandler = dims => this.setState({ dimensions: dims.window });
 
-  componentWillMount() {
-    Dimensions.addEventListener("change", this._dimHandler);
+  componentDidMount() {
+    Dimensions.addEventListener('change', this._dimHandler);
   }
 
   componentWillUnmount() {
-    Dimensions.removeEventListener("change", this._dimHandler);
+    Dimensions.removeEventListener('change', this._dimHandler);
   }
 
   render = () => {
@@ -276,9 +276,19 @@ export default class Search extends Component {
           }
         ]}>
         {this.state.show && (
-          <View style={[{ backgroundColor }, {width:this.state.dimensions.width}]}>
-            {Platform.OS === 'ios' &&
-              iOSPadding && <View style={{ height: 20, backgroundColor: iOSPaddingBackgroundColor }} />}
+          <View
+            style={[
+              { backgroundColor },
+              { width: this.state.dimensions.width }
+            ]}>
+            {Platform.OS === 'ios' && iOSPadding && (
+              <View
+                style={{
+                  height: 20,
+                  backgroundColor: iOSPaddingBackgroundColor
+                }}
+              />
+            )}
             <View
               style={[
                 styles.nav,
@@ -313,7 +323,7 @@ export default class Search extends Component {
                 style={[
                   styles.input,
                   {
-                    width:this.state.dimensions.width-120,
+                    width: this.state.dimensions.width - 120,
                     fontSize: fontSize,
                     color: textColor,
                     fontFamily: fontFamily,
@@ -324,7 +334,8 @@ export default class Search extends Component {
                 selectionColor={selectionColor}
                 onChangeText={input => this._onChangeText(input)}
                 onSubmitEditing={() =>
-                  onSubmitEditing ? onSubmitEditing() : null}
+                  onSubmitEditing ? onSubmitEditing() : null
+                }
                 onFocus={() => (onFocus ? onFocus() : null)}
                 onBlur={this._handleBlur}
                 placeholder={placeholder}
