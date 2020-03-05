@@ -195,7 +195,7 @@ export default class Search extends Component {
           const results = this._internalSearch(input);
           handleResults(results);
         }
-      }, 500)();
+      }, 1000)();
     }
   };
 
